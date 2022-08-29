@@ -3,7 +3,7 @@ import { PluginSettings } from "settings";
 import { EmbedSource, EnableEmbedKey } from "./";
 
 const REDDIT_LINK = new RegExp(
-  /https:\/\/(?:www\.)?reddit\.com\/r\/(?<comment>.+)/,
+  /https:\/\/(?:www\.)?reddit\.com\/r\/(?<comment>[\w&$+,\/:;=?@#\._~%-]+)/,
 );
 
 export class RedditEmbed implements EmbedSource {
@@ -23,7 +23,7 @@ export class RedditEmbed implements EmbedSource {
 
     const theme =
       settings.redditTheme === "auto" ? currentTheme : settings.redditTheme;
-    iframe.src = `https://www.redditmedia.com/r/${comment}/?ref_source=embed&amp;ref=share&amp;embed=true;theme=${theme}`;
+    iframe.src = `https://www.redditmedia.com/r/${comment}?ref_source=embed&ref=share&embed=true&theme=${theme}`;
     iframe.setAttribute("frameborder", "0");
     iframe.setAttribute(
       "sandbox",
